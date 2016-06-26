@@ -1,0 +1,29 @@
+<div class="jumbotron">
+  <h1>Facebook Gallery</h1>
+  <p class="lead">
+    Backup your pictures
+  </p>
+  <p>
+    {{name}}
+  </p>
+  <p>
+    <button type="button" ng-click="login()" ng-hide="isLoggedIn" class="btn btn-lg btn-success">
+      Login
+    </button>
+    <button type="button" ng-click="logout()" ng-hide="!isLoggedIn" class="btn btn-lg btn-success">
+      Logout
+    </button>
+  </p>
+</div>
+<div id="fb-root"></div>
+<div id="gallery" class="row">
+  <div class="col-md-3 col-sm-4 col-xs-6" ng-repeat="album in albums">
+    <a href="/#/album/{{album.id}}">
+      <div class="picbox" style="background-image: url({{album.cover}})">
+        <div class="title">
+          {{album.title}}
+        </div>
+      </div>
+    </a>
+  </div>
+</div>

@@ -1,0 +1,41 @@
+<!-- gallery -->
+<div id="gallery" class="row" style="min-height: 360px;">
+  <div class="col-md-3 col-sm-4 col-xs-6" ng-repeat="photo in photos | startFrom:currentPage*pageSize | limitTo:pageSize">
+    <a href="{{photo.images[0].source}}" data-lightbox="album">
+      <div class="progress pbar" ng-hide="photo.progress == 0 || photo.progress == 100">
+        <div class="progress-bar " role="progressbar" aria-valuenow="{{photo.progress}}" aria-valuemin="0" aria-valuemax="100" style="width: {{photo.progress}}%;">
+        </div>
+      </div>
+      <div class="picbox" style="background-image: url({{photo.images[photo.images.length - 1].source}})">
+      </div>
+    </a>
+    <span class="glyphicon glyphicon-ok checkPic" style="color: rgba(76, 175, 80, 0.78)" aria-hidden="true" ng-hide="photo.progress != 100"></span>
+    <input type="checkbox" class="checkPic" ng-hide="photo.progress == 100" ng-change="getSelected()" ng-model="selected[photo.images[0].source]">
+  </div>
+</div>
+<!-- pagination -->
+<div class="row align-right">
+  <ul class="pagination">
+    <li>
+      <a ng-class="{disabled: currentPage == 0}" ng-click="currentPage=currentPage-1">
+        <span class="glyphicon glyphicon-chevron-left" aria-hidden="true"></span>
+      </a>
+    </li>
+  </ul>
+  <ul class="pagination">
+    <li ng-repeat="i in getNumber(photos.length/pageSize) track by $index" ng-class="{active: $index==currentPage}" ng-click="chPage($index)">
+      <a style="cursor: pointer;">{{$index+1}}</a>
+    </li>
+  </ul>
+  <ul class="pagination">
+    <li>
+      <a ng-class="{disabled: currentPage >= photos.length/pageSize - 1}" ng-click="currentPage=currentPage+1">
+        <span class="glyphicon glyphicon-chevron-right" aria-hidden="true"></span>
+    </a>
+  </li>
+  </ul>
+</div>
+<!-- upload to S3 -->
+<div class="row">
+  <button type="button" class="btn btn-success btn-dl" ng-hide="photos.length == 0" ng-disabled="!isSelected" ng-click='download()'>Upload</button>
+</div>
