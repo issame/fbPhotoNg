@@ -21,7 +21,6 @@ angular.module('fbphotoNgApp')
       }
     });
 
-    this.Progress = 0;
     this.Upload = function(id, url) {
       var deferred = $q.defer();
       var filename = '';
