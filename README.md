@@ -7,6 +7,6 @@ version 0.15.1.
 
 Run `grunt` for building and `grunt serve` for preview.
 
-## Testing
+## API Keys
 
-Running `grunt test` will run the unit tests with karma.
+Place your Facebook AppID at app.js and your Amazon API credentiales at services/authservice.js
