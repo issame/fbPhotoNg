@@ -13,7 +13,7 @@ angular.module('fbphotoNgApp')
     authService, albumService) {
     if ($scope.albums == undefined)
       $scope.albums = [];
-      
+
     $scope.login = function() {
       authService.login();
     }
@@ -25,6 +25,11 @@ angular.module('fbphotoNgApp')
       if (val) {
         albumService.getAlbums()
           .then(function(data) {
+            console.log(data)
+            data.sort(function(a, b) {
+              return a.name.localeCompare(b.name);
+            });
+            console.log(data)
             getCovers(data);
           }, function(error) {
             console.log('error', error);

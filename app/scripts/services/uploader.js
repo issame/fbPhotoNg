@@ -11,8 +11,8 @@ angular.module('fbphotoNgApp')
   .service('S3UploadService', function($q, $http) {
     AWS.config.region = 'us-east-1';
     AWS.config.update({
-      accessKeyId: '************************',
-      secretAccessKey: '********************'
+      accessKeyId: '*******************************************',
+      secretAccessKey: '***************************************'
     });
 
     var bucket = new AWS.S3({

@@ -8,11 +8,13 @@
  * Controller of the fbphotoNgApp
  */
 angular.module('fbphotoNgApp')
-  .controller('AlbumCtrl', function($scope, $routeParams, photoService, S3UploadService, $rootScope) {
+  .controller('AlbumCtrl', function($scope, $routeParams, photoService, S3UploadService, $rootScope, ngDialog) {
     $scope.currentPage = 0;
     $scope.pageSize = 8;
     $scope.selected = {};
     $scope.isSelected = false;
+    var nbSelected = 0;
+    var uploaded = 0;
 
     $scope.getNumber = function(num) {
       if (isNaN(num)) {
@@ -26,29 +28,41 @@ angular.module('fbphotoNgApp')
     }
 
     $scope.download = function() {
-      angular.forEach($scope.selected, function(key, val) {
-        if (key) {
-          S3UploadService.Upload($rootScope.id, val).then(function(result) {
-            file.Success = true;
-          }, function(error) {
-            $scope.Error = error;
-          }, function(progress) {
-            angular.forEach($scope.photos, function(eachObj) {
-              if (eachObj.images[0].source.indexOf(val) > -1) {
-                eachObj.progress = Math.round(progress.loaded / progress.total * 100);
-              }
+      if (confirm("Are you sure?")) {
+        uploaded = 0;
+        angular.forEach($scope.selected, function(key, val) {
+          if (key) {
+            S3UploadService.Upload($rootScope.id, val).then(function(result) {
+              file.Success = true;
+            }, function(error) {
+              $scope.Error = error;
+            }, function(progress) {
+              angular.forEach($scope.photos, function(eachObj) {
+                if (eachObj.images[0].source.indexOf(val) > -1) {
+                  eachObj.progress = Math.round(progress.loaded / progress.total * 100);
+                  if (eachObj.progress == 100)
+                    uploaded++;
+                  if (uploaded == nbSelected)
+                    ngDialog.open({
+                      template: 'firstDialog',
+                      className: 'ngdialog-theme-default ngdialog-theme-custom'
+                    });
+                }
+              });
+              //console.log(Math.round(progress.loaded / progress.total * 100) + '% done');
             });
-            //console.log(Math.round(progress.loaded / progress.total * 100) + '% done');
-          });
-        }
-      });
+          }
+        });
+      }
     }
 
     $scope.getSelected = function() {
       $scope.isSelected = false;
+      nbSelected = 0;
       angular.forEach($scope.selected, function(key, val) {
         if (key) {
           $scope.isSelected = true;
+          nbSelected++;
         }
       });
     }

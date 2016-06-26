@@ -17,9 +17,9 @@
 </div>
 <div id="fb-root"></div>
 <div id="gallery" class="row">
-  <div class="col-md-3 col-sm-4 col-xs-6" ng-repeat="album in albums">
+  <div class="col-md-6" ng-repeat="album in albums">
     <a href="/#/album/{{album.id}}">
-      <div class="picbox" style="background-image: url({{album.cover}})">
+      <div class="albumbox" style="background-image: url({{album.cover}})">
         <div class="title">
           {{album.title}}
         </div>

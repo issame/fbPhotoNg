@@ -7,6 +7,15 @@
 body {
   padding: 0;
 }
+.albumbox {
+  background-size: cover;
+  background-position: center center;
+  background-repeat: no-repeat;
+  width: 350px;
+  height: 350px;
+  margin: 10px 10px 10px 0;
+}
+
 .picbox {
   background-size: cover;
   background-position: center center;
@@ -22,7 +31,7 @@ body {
   width: 100%;
   color: #555;
   padding: 5px;
-  max-width: 160px;
+  max-width: 350px;
 }
 .checkPic {
   margin: 0;

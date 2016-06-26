@@ -32,6 +32,7 @@ module.exports = function(config) {
       'bower_components/ng-facebook/ngFacebook.js',
       'bower_components/lightbox2/dist/js/lightbox.js',
       'bower_components/aws-sdk/dist/aws-sdk.js',
+      'bower_components/ng-dialog/js/ngDialog.js',
       'bower_components/angular-mocks/angular-mocks.js',
       // endbower
       'app/scripts/**/*.js',

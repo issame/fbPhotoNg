@@ -16,10 +16,11 @@ angular
     'ngRoute',
     'ngSanitize',
     'ngTouch',
-    'ngFacebook'
+    'ngFacebook',
+    'ngDialog'
   ])
   .config(function($routeProvider, $facebookProvider) {
-    $facebookProvider.setAppId('******************');
+    $facebookProvider.setAppId('***************************************');
     $facebookProvider.setPermissions('user_photos');
     $routeProvider
       .when('/', {
